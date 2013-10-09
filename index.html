@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/signup.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+        <script src="js/jquery.validate.messages_ja.js"></script>
+    </head>
+<body>
+<script type="text/javascript"> 
+function setUsername(emailAddr){
+    var domain = "PLEASE_SET_YOUR_DOMAIN";
+    var lat=emailAddr.indexOf("@");
+    var userFront = emailAddr.substring(0, lat);
+    var random_num = Math.floor(Math.random() * 9999)
+    document.forms['signup_form'].UserUsername.value = userFront + "+" + random_num + "@" + domain;
+    return true;
+}
+
+$("document").ready(function(){
+    $("#signup_form").validate();
+});
+</script>
+
+<form action="https://www.salesforce.com/leadcapture/PartnerSignupServlet" method="post" id="signup_form" name="signup_form" onsubmit="javascript:return setUsername(document.signup_form['UserEmail'].value)">
+
+<input type="hidden" name="Lead.Partner_Account__c" id="Partner_Account__c" value="PLESE_SET_YOUR_ACCOUNT_ID"/>
+<input name="Lead.Referrer_Company__c" value="PLEASE_SET_YOUR_COMPANY_NAME" type="hidden" />
+<input type="hidden" name="successPage" value='https://PLEASE_SET_YOUR_DOMAIN/signup/success.html' />
+<input type="hidden" name="failPage" value='https://PLEASE_SET_YOUR_DOMAIN/signup/fail.html' />
+<input type="hidden" name="formName" value="PLEASE_SET_YOUR_FORMNAME" />
+
+<input type="hidden" name="UserUsername" value="" />
+<input type="hidden" name="resultWebApp" value="/ROOT" />
+<input type="hidden" name="process_form" value="true" />
+<input type="hidden" id="CompanyCountry" name="CompanyCountry" value="JP" />
+<input type="hidden" id="CompanyLanguage" name="CompanyLanguage" value="ja" />
+<input name="LeadSource" value="Trialforce - OEM" type="hidden" />
+
+<div id='top'>
+    <h1>すごいアンケート</h1>
+    <img src="image/signup_for_30_days_free_trial.png" />
+</div>
+<div id='middle'>
+    <div class="input_container_tall">
+        <input type='text' name="CompanyName" class="required" placeholder="会社" maxlength="255" />
+    </div> 
+    <div class="input_container_tall">
+        <input type='text' name="UserLastName" class="required" placeholder="お名前（姓）" maxlength="255"  />
+    </div>
+    <div class="input_container_tall">
+        <input type='text' name="UserFirstName" class="required" placeholder="お名前（名）" maxlength="255" />
+    </div>
+    <div class="input_container_tall">
+        <input type='text' name="UserEmail" class="required email sfdcUsername" placeholder="Email" maxlength="255" />
+    </div>
+    <div class="input_container_small" style="text-align:center;">
+       <input type="hidden" name="SubscriptionAgreement" value="on" />
+       <a class="terms" href="PLEASE_SET_YOUR_TERM_AND_AGREEMENT" target="_blank">利用規約</a>
+    </div>
+    <div class="input_container_small">
+        <button type="submit" class="mybutton" />利用規約に同意して送信</button>
+    </div>
+</div>
+<div id='bottom'>
+    <h3>All Rights Reserved. Copy Right YOUR COMPANY, 2012</h3>
+</div>
+</form>
+</body>
+</html>
